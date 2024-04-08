@@ -25,14 +25,17 @@
                         <td>{{ $project->author }}</td>
                         <td><a href="{{ $project->project_link }}" target="_blank">Go to the project</a></td>
                         <td>
-                            <a href="{{ route('admin.projects.show', $project) }}" class="p-2 mx-2"><i
-                                    class="fa-solid fa-eye"></i></a>
-                            <a href="{{ route('admin.projects.edit', $project) }}" class="p-2 mx-2"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
-                            <button type="button" class="btn p-2 mx-2 modal-button" data-bs-toggle="modal"
-                                data-bs-target="#delete-project-{{ $project->id }}">
-                                <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
-                            </button>
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="d-flex align-items-center">
+                                    <a href="{{ route('admin.projects.show', $project) }}" class="p-2 mx-2"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('admin.projects.edit', $project) }}" class="p-2 mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <button type="submit" class="btn p-2 mx-2" onclick="return confirm('Sei sicuro di voler eliminare questo progetto?')">
+                                        <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 @empty

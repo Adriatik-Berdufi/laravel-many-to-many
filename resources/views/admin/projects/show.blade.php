@@ -6,9 +6,16 @@
 
 @section('content')
   <div class="container">
-    <a href="{{ route('admin.projects.index') }}" class="btn btn-primary mt-4 mb-3">Torna alla lista</a>
-    <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary mt-4 mb-3">Modifica</a>
-    <button type="button" class="btn btn-danger mt-4 mb-3" data-bs-toggle="modal"data-bs-target="#delete-project-{{ $project->id }}">Elimina</button>
+   <div class="d-flex gap-3">
+      <a href="{{ route('admin.projects.index') }}" class="btn btn-primary mt-4 mb-3">Torna alla lista</a>
+      <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-primary mt-4 mb-3">Modifica</a>
+      <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger mt-4 mb-3" data-bs-toggle="modal"data-bs-target="#delete-project-{{ $project->id }}">Elimina</button>
+      </form>
+   </div>
+    
 
     <div class="card w-25 mx-auto text-center">
       <div class="card-header mb-3"> 
