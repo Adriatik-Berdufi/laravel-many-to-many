@@ -53,7 +53,7 @@
                         @foreach ($chunk as $technology)
                             <div class="col-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="technology_{{ $technology->id }}" name="technologies[]">
+                                    <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="technology_{{ $technology->id }}" name="technologies[]" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="technology_{{ $technology->id }}">
                                         {{ $technology->label }}
                                     </label>

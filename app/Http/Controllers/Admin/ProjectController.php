@@ -42,6 +42,10 @@ class ProjectController extends Controller
         $new_project->fill($data);
         $new_project->save();
 
+        if (isset($data['technologies'])) {
+            $new_project->technologies()->attach($data['technologies']);
+        }
+
         return redirect()->route('admin.projects.show', $new_project)->with('message', 'successfully created');
     }
 
@@ -52,7 +56,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {   
-        $technologies = Technology::all();
+       
+        $technologies = $project->technologies;
         return view('admin.projects.show', compact('project','technologies'));
     }
 
@@ -77,6 +82,11 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         $project->update($data);
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
         return redirect()->route('admin.projects.show', compact('project'))->with('message', 'Progetto modificato con successo');
     }
 
