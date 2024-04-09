@@ -15,7 +15,19 @@ class Project extends Model
         'description',
         'project_link'
     ];
+
+    // metodo per la relazione
     public function technologies(){
         return $this->belongsToMany(Technology::class);
+    }
+    //metodo per la validazione
+    public static function getValidationRules()
+    {
+        return [
+            'title' => 'required',
+            'author' => 'required',
+            'project_link' => 'required|url',
+            'description' => '',
+        ];
     }
 }

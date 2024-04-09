@@ -35,15 +35,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $rules = Project::getValidationRules();
 
-        $data = $request->all();
+        $data = $request->validate($rules);
         $new_project = new Project;
         $new_project->fill($data);
         $new_project->save();
 
-        if (isset($data['technologies'])) {
-            $new_project->technologies()->attach($data['technologies']);
+        if ($request->has('technologies')) {
+            $new_project->technologies()->attach($request->input('technologies'));
         }
 
         return redirect()->route('admin.projects.show', $new_project)->with('message', 'successfully created');
@@ -80,10 +80,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $data = $request->all();
+        $rules = Project::getValidationRules();
+
+        $data = $request->validate($rules);
         $project->update($data);
-        if (isset($data['technologies'])) {
-            $project->technologies()->sync($data['technologies']);
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->input('technologies'));
         } else {
             $project->technologies()->detach();
         }
