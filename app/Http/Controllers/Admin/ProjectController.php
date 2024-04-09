@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -22,8 +23,9 @@ class ProjectController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('admin.projects.create');
+    {   
+        $technologies = Technology::all();
+        return view('admin.projects.create',compact('technologies'));
     }
 
     /**
@@ -49,8 +51,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      */
     public function show(Project $project)
-    {
-        return view('admin.projects.show', compact('project'));
+    {   
+        $technologies = Technology::all();
+        return view('admin.projects.show', compact('project','technologies'));
     }
 
     /**
@@ -59,8 +62,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      */
     public function edit(Project $project)
-    {
-        return view('admin.projects.edit', compact('project'));
+    {   
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project','technologies'));
     }
 
     /**

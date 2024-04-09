@@ -11,6 +11,9 @@
           <li class="nav-item">
             <a @class(['nav-link', 'active' => Route::currentRouteName() == 'home']) aria-current="page" href="{{ route('home') }}">Home</a>
           </li>
+          <li class="nav-item">
+            <a @class(['nav-link', 'active' => Route::currentRouteName() == 'admin.projects.index']) aria-current="page" href="{{ route('admin.projects.index') }}">Projects</a>
+          </li>
 
           @guest
             <li class="nav-item">

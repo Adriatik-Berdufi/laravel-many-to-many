@@ -30,7 +30,7 @@
               @enderror
           </div>
 
-          <div class="col-12">
+          <div class="col-6">
               <label for="project_link" class="form-label">Link al progetto</label>
               <input type="url" class="form-control @error('project_link') is-invalid @enderror" id="project_link"
                   name="project_link" value="{{ old('project_link') }}">
@@ -38,6 +38,24 @@
                   <div class="invalid-feedback">{{ $message }}</div>
               @enderror
           </div>
+         <div class="col-6 text-center">
+            <h5>Technology</h5>
+                @foreach ($technologies->chunk(3) as $chunk)
+                <div class="row">
+                    @foreach ($chunk as $technology)
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="technology_{{ $technology->id }}" name="technologies[]">
+                                <label class="form-check-label" for="technology_{{ $technology->id }}">
+                                    {{ $technology->label }}
+                                </label>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+         </div>
+        
 
           <div class="col-12">
               <label for="description" class="form-label">Descrizione</label>
