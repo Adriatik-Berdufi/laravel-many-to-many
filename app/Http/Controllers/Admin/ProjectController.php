@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -38,6 +39,8 @@ class ProjectController extends Controller
         $rules = Project::getValidationRules();
 
         $data = $request->validate($rules);
+        //dd($data);
+        Storage::put('uploads/projects', $data['image']);
         $new_project = new Project;
         $new_project->fill($data);
         $new_project->save();

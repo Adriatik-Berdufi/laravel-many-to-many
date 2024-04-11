@@ -28,6 +28,7 @@ class Project extends Model
             'author' => 'required',
             'project_link' => 'required|url',
             'description' => '',
+            'image'=>'',
         ];
     }
 }

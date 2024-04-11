@@ -11,7 +11,7 @@
     
     <h1 class="mb-3">Modifica {{ $project->title }}</h1>
 
-    <form action="{{ route('admin.projects.update', $project) }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         @method('PATCH')
@@ -63,6 +63,11 @@
                     </div>
                 @endforeach
              </div>
+
+             <div class="mb-3">
+                <label for="image" class="form-label">Carica immagine</label>
+                <input class="form-control" type="file" name="image" id="image">
+              </div>
 
             <div class="col-12">
                 <label for="description" class="form-label">Descrizione</label>

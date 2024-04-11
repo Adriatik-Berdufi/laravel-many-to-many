@@ -16,25 +16,40 @@
       </form>
    </div>
     
-
-    <div class="card w-25 mx-auto text-center">
-      <div class="card-header mb-3"> 
-        <h1 class="mt-3 fw-bold">{{ $project->title }}</h1>
+   <div class="row">
+      <div class="col-6">
+        <div class="card  mx-auto text-center">
+          <div class="card-header mb-3"> 
+            <h1 class="mt-3 fw-bold">{{ $project->title }}</h1>
+          </div>
+          <span class="d-inline-block fw-bold fs-5">Created By:</span><code class="d-inline-block fs-5">{{ $project->author }}</code>
+    
+          <span class="mt-3 fs-5 fw-bold d-block">Description:</span>
+          <p>{{ $project->description }}</p>
+    
+          <span class="mt-3 fs-5 fw-bold d-block">Technologies:</span>
+          @foreach ($technologies as $technology)
+            <span>{{ $technology->label }}</span>
+          @endforeach
+    
+          <span class="mt-3 fs-5 fw-bold">Link project:</span>
+          <a href="{{ $project->project_link }}" target="_blank"><i class="mb-4 fa-xl fa-brands fa-square-github"></i></i></a>
+        </div>
       </div>
-      <span class="d-inline-block fw-bold fs-5">Created By:</span><code class="d-inline-block fs-5">{{ $project->author }}</code>
+      <div class="col-6">
+        <div class="card  mx-auto text-center">
+          <div>
+            foto
+          </div>
+        </div>
+      </div>
 
-      <span class="mt-3 fs-5 fw-bold d-block">Description:</span>
-      <p>{{ $project->description }}</p>
+   </div>
+    
 
-      <span class="mt-3 fs-5 fw-bold d-block">Technologies:</span>
-      @foreach ($technologies as $technology)
-        <span>{{ $technology->label }}</span>
-      @endforeach
-
-      <span class="mt-3 fs-5 fw-bold">Link project:</span>
-      <a href="{{ $project->project_link }}" target="_blank"><i class="mb-4 fa-xl fa-brands fa-square-github"></i></i></a>
-    </div>
+    
   </div>
+  
 @endsection
 
 @section('css')
