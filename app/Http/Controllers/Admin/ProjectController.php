@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ProjectController extends Controller
 {
@@ -40,8 +41,10 @@ class ProjectController extends Controller
 
         $data = $request->validate($rules);
         //dd($data);
-        Storage::put('uploads/projects', $data['image']);
+        $img_path = Storage::put('uploads/projects', $data['image']);
+      
         $new_project = new Project;
+        $new_project->image = $img_path;
         $new_project->fill($data);
         $new_project->save();
 
@@ -84,9 +87,18 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $rules = Project::getValidationRules();
-
         $data = $request->validate($rules);
+        
+        if(Arr::exists($data , 'image')){
+            if(!empty($project->image)){
+                Storage::delete($project->image);
+            }
+            $img_path = Storage::put('uploads/projects', $data['image']); 
+            $project->image = $img_path;
+        }
         $project->update($data);
+
+
         if ($request->has('technologies')) {
             $project->technologies()->sync($request->input('technologies'));
         } else {

@@ -38,9 +38,14 @@
       </div>
       <div class="col-6">
         <div class="card  mx-auto text-center">
-          <div>
-            foto
+          
+          @if(!empty($project->image))
+          <img src="{{asset('storage/' . $project->image)}}" class="card-img-top" alt="project image">
+          @endif
+          <div class="card-header mb-3"> 
+            <h1 class="mt-3 fw-bold">{{ $project->title }}</h1>
           </div>
+          
         </div>
       </div>
 

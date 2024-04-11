@@ -68,6 +68,11 @@
                 <label for="image" class="form-label">Carica immagine</label>
                 <input class="form-control" type="file" name="image" id="image">
               </div>
+              @if (!empty($project->image))
+                <span>imagine presente</span>
+                <img src="{{asset('storage/' . $project->image)}}" class="card-img-top" alt="project image"  style="max-width: 100px;">
+                 
+              @endif
 
             <div class="col-12">
                 <label for="description" class="form-label">Descrizione</label>
