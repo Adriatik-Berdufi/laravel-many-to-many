@@ -26,8 +26,9 @@ class ProjectController extends Controller
      */
     public function create()
     {   
+        $project = new Project;
         $technologies = Technology::all();
-        return view('admin.projects.create',compact('technologies'));
+        return view('admin.projects.create',compact('project','technologies'));
     }
 
     /**
@@ -38,11 +39,9 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $rules = Project::getValidationRules();
-
         $data = $request->validate($rules);
-        //dd($data);
         $img_path = Storage::put('uploads/projects', $data['image']);
-      
+        
         $new_project = new Project;
         $new_project->image = $img_path;
         $new_project->fill($data);

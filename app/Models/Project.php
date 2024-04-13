@@ -14,7 +14,7 @@ class Project extends Model
         'author',
         'description',
         'project_link',
-        'image',
+        
     ];
 
     // metodo per la relazione
