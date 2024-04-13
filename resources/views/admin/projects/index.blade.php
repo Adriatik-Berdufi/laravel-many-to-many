@@ -13,6 +13,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nome del progetto</th>
                     <th scope="col">Autore</th>
+                    <th scope="col">Imagine</th>
                     <th scope="col">Link</th>
                     <th scope="col"></th>
                 </tr>
@@ -23,6 +24,11 @@
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->author }}</td>
+                        <td>
+                            @if(!empty($project->image))
+                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top" alt="project image" style="max-height: 50px; width: auto;">
+                            @endif
+                        </td>
                         <td><a href="{{ $project->project_link }}" target="_blank">Go to the project</a></td>
                         <td>
                             <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
