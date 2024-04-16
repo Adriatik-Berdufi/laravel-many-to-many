@@ -34,7 +34,7 @@ class ProjectController extends Controller
 {
     $project = Project::select("id","title","author", "image","description","project_link")
         ->where('id', $id)
-        ->with('technologies:id,label,color')
+        ->with('technologies:id,label,color','categories:id,label,color')
         ->first();
 
     $project->image = !empty($project->image) ? asset('/storage/' . $project->image) : null;
