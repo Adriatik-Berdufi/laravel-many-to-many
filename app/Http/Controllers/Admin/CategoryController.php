@@ -35,7 +35,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = Category::getValidationRules();
+        $data = $request->validate($rules);
+        $new_category = new Category;
+        $new_category->fill($data);
+        $new_category->save();
+
+
+        return redirect()->route('admin.categories.index', $new_category);
     }
 
     /**
@@ -45,7 +52,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -55,7 +62,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -66,7 +73,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $rules = Category::getValidationRules();
+        $data = $request->validate($rules);
+
+        $category->update($data);
+
+        return redirect()->route('admin.categories.index', compact('category'));
     }
 
     /**
@@ -76,6 +88,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('admin.categories.index');
     }
 }

@@ -25,7 +25,6 @@
                                 @csrf
                                 @method('DELETE')
                                 <div class="d-flex align-items-center">
-                                    <a href="{{ route('admin.categories.show', $category) }}" class="p-2 mx-2"><i class="fa-solid fa-eye"></i></a>
                                     <a href="{{ route('admin.categories.edit', $category) }}" class="p-2 mx-2"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <button type="submit" class="btn p-2 mx-2" onclick="return confirm('Sei sicuro di voler eliminare questo progetto?')">
                                         <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
