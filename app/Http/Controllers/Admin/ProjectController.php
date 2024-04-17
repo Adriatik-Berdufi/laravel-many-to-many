@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,7 @@ class ProjectController extends Controller
     public function create()
     {   
         $project = new Project;
+        $category = Category::all();
         $technologies = Technology::all();
         return view('admin.projects.create',compact('project','technologies'));
     }
@@ -61,10 +63,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {   
-       
         $technologies = $project->technologies;
-        return view('admin.projects.show', compact('project','technologies'));
+        $category = $project->category;
+        return view('admin.projects.show', compact('project', 'technologies', 'category'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -73,8 +76,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {   
+        $category = Category::all();
         $technologies = Technology::all();
-        return view('admin.projects.edit', compact('project','technologies'));
+        return view('admin.projects.edit', compact('project','technologies','category'));
     }
 
     /**

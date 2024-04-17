@@ -2,6 +2,9 @@
 
 @section('title')
     {{ $project->title }}
+    {{-- @php
+        dd($project);
+    @endphp --}}
 @endsection
 
 @section('content')
@@ -31,7 +34,12 @@
           @foreach ($technologies as $technology)
             <span>{{ $technology->label }}</span>
           @endforeach
-    
+
+          <span class="mt-3 fs-5 fw-bold d-block">Category:</span>
+          @if ($project->category)
+            <span>{{ $project->category->label }}</span>
+          @endif
+
           <span class="mt-3 fs-5 fw-bold">Link project:</span>
           <a href="{{ $project->project_link }}" target="_blank"><i class="mb-4 fa-xl fa-brands fa-square-github"></i></i></a>
         </div>

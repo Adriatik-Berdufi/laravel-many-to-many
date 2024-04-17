@@ -21,7 +21,8 @@ class Project extends Model
     // metodo per la relazione
     public function technologies(){
         return $this->belongsToMany(Technology::class);
-    }public function category(){
+    }
+    public function category(){
         return $this->belongsTo(Category::class);
     }
 

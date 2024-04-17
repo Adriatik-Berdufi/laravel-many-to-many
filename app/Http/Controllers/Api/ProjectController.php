@@ -15,8 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::select("id","title","author", "image","description","project_link")
-        ->with('technologies:id,label,color')
+        $projects = Project::select("id","category_id","title","author", "image","description","project_link")
+        ->with(['technologies:id,label,color','category:id,label,color'])
         ->paginate();
 
         foreach($projects as $project){
@@ -32,9 +32,9 @@ class ProjectController extends Controller
      */
     public function show($id)
 {
-    $project = Project::select("id","title","author", "image","description","project_link")
+    $project = Project::select("id","category_id","title","author", "image","description","project_link")
         ->where('id', $id)
-        ->with('technologies:id,label,color','categories:id,label,color')
+        ->with(['technologies:id,label,color','category:id,label,color'])
         ->first();
 
     $project->image = !empty($project->image) ? asset('/storage/' . $project->image) : null;
